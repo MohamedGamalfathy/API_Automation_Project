@@ -1,0 +1,106 @@
+
+//Created By : Mohamed Gamal El-din Fathy
+
+-------------------------------------------------------
+ Swagger Requests & Test Cases .
+-------------------------------------------------------
+ BASEURL :	http://fakerestapi.azurewebsites.net 
+-------------------------------------------------------
+
+ Request (1) : Get Authors 
+----------------------------
+ 
+ API: GET >> {{BASEURL}}/api/v1/Authors
+
+ Test Case 1: response should be 200 OK
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ 
+ Test Case 2: check objects inside response Body
+ Expected Result: {"id","idBook","firstName","lastName"}
+ Actual Result: {"id","idBook","firstName","lastName"}
+ Status: Pass
+
+---------------------------------------------------------------------------------------------------------------------------
+ Request (2) : Create New Author 
+----------------------------------
+
+  API: POST >> {{BASEURL}}/api/v1/Authors
+
+ 
+ Test Case 1: Register a new valid Author successfully and response code "200 OK".
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+
+ Test Case 2 : firstname & lastname should be mandatory at response body
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ 
+ Test Case 3: firstname & lastname should have data
+ Expected Result: {"firstName":"Mohamed","lastName":"Gamal"}
+ Actual Result: {"firstName":"Mohamed","lastName":"Gamal"}
+ Status: Pass
+
+----------------------------------------------------------------------------------------------------------------------------
+ Request (3) : Get Author idBook 
+------------------------------------
+
+ API: GET >> {{BASEURL}}/api/v1/Authors/authors/books/{{idBook}}
+
+ Test Case 1: Searching with valid idBook should return relative data in response body.
+ Expected Result:  {"idbook" :4}
+ Actual Result: {"idbook" :4}
+ Status: Pass
+
+--------------------------------------------------------------------------------------------------------------------------
+ Request (4) :  Update Author Data (firstName, lastName) 
+---------------------------------------------------------
+
+ API : PUT >> {{BASEURL}}/api/v1/Authors/{{id}}
+
+ Test Case 1: Author's data is updated successfully. 
+ Expected Result: {"firstName":"Mohamed","lastName":"Gamal"}
+ Actual Result: {"firstName":"Mohamed","lastName":"Gamal"}
+ Status: Pass
+
+-------------------------------------------------------------------------------------------------------------------------
+ Request (5) : Get Single Author By id 
+----------------------------------------
+
+ API : GET >> {{BASEURL}}/api/v1/Authors/{{id}}
+
+ Test Case 1: response should be 200 OK
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+
+Test case 2: The author's data is changed in GET request.
+ Expected Result: {"firstName":"Mohamed","lastName":"Gamal"}
+ Actual Result: {"firstName":"First Name 22","lastName":"Last Name 22"}
+ Status: Fail
+
+ 
+------------------------------------------------------------------------------------------------------------------------
+ Request (6) : Delete Author 
+-----------------------------
+
+ API : DELETE >> {{BASEURL}}/api/v1/Authors/{{id}}
+
+ Test Case 1: response should be 200 OK
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+
+ 
+
+
+
+ 
+
+
+
+
+

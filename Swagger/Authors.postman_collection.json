@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "6e0b8172-abf3-4840-bfed-6125e6552e79",
+		"name": "Authors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23228564"
+	},
+	"item": [
+		{
+			"name": "Get Authors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Test Case 1 :\r",
+							"\r",
+							"pm.test(\"response should be 200 OK\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+							"});\r",
+							"\r",
+							"// Test Case 2 :\r",
+							"var objects_number = pm.response.json().length;\r",
+							"var random_number = Math.floor(Math.random()*objects_number);\r",
+							"\r",
+							"pm.test(\"check objects inside response Body\",function()\r",
+							"{\r",
+							"    pm.expect(jsonData[random_number]).to.have.all.keys(\"id\",\"idBook\",\"firstName\",\"lastName\")\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}/api/v1/Authors",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Test Case 1 :\r",
+							"\r",
+							"pm.test(\"response should be 200 OK\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+							"});\r",
+							"\r",
+							"// Test Case 2 :\r",
+							"\r",
+							"pm.test(\"firstname & lastname should be mandatory\", function () {\r",
+							"    pm.expect(jsonData).to.have.any.keys(\"firstName\", \"lastName\")\r",
+							"});\r",
+							"\r",
+							"// Test Case 3 :\r",
+							"\r",
+							"pm.test(\"firstname & lastname should have data\", function () {\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Mohamed\");\r",
+							"    pm.expect(jsonData.lastName).to.eql(\"Gamal\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"Mohamed\" ,\r\n    \"lastName\":\"Gamal\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL}}/api/v1/Authors",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Author idBook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var id_book = pm.environment.get(\"idBook\")\r",
+							"var id_book = Number(id_book);\r",
+							"var jsonData = pm.response.json();\r",
+							"var objects_number = pm.response.json().length;\r",
+							"\r",
+							"\r",
+							"// Test Case 1 :\r",
+							" pm.test(\"Searching with valid idBook\",function()\r",
+							" {\r",
+							"    for(var i =0 ; i<objects_number ; i++)\r",
+							"    {\r",
+							"        pm.expect(jsonData[i].idBook).to.eql(id_book)\r",
+							"    }\r",
+							" })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}/api/v1/Authors/authors/books/{{idBook}}",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Authors",
+						"authors",
+						"books",
+						"{{idBook}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Test Case 1 :\r",
+							"\r",
+							"pm.test(\"Author's data is updated successfully\", function () {\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Mohamed\");\r",
+							"    pm.expect(jsonData.lastName).to.eql(\"ELshayeb\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 22,\r\n  \"idBook\": 3,\r\n  \"firstName\": \"Mohamed\",\r\n  \"lastName\": \"ELshayeb\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL}}/api/v1/Authors/{{id}}",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Author By id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var jsonData = pm.response.json();\r",
+							"\r",
+							"// Test Case 1 :\r",
+							"\r",
+							"pm.test(\"response should be 200 OK\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Test Case 2 :\r",
+							"\r",
+							"pm.test(\"The author's data is changed in GET request\", function () {\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Mohamed\");\r",
+							"    pm.expect(jsonData.lastName).to.eql(\"Gamal\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}/api/v1/Authors/{{id}}",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Author",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}/api/v1/Authors/{{id}}",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
