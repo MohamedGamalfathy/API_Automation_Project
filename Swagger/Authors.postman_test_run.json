@@ -1,0 +1,228 @@
+{
+	"id": "120bc0ce-9833-4d7c-8c1e-0f3274ccd751",
+	"name": "Authors",
+	"timestamp": "2022-09-13T21:23:05.045Z",
+	"collection_id": "23228564-6e0b8172-abf3-4840-bfed-6125e6552e79",
+	"folder_id": 0,
+	"environment_id": "23228564-c375b31c-1364-4cff-a598-62a3434409bb",
+	"totalPass": 9,
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "0c22e83b-2b43-4773-88e5-270d95fc7ea5",
+			"name": "Get Authors",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 509,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"check objects inside response Body": true
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"check objects inside response Body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				509
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"check objects inside response Body": true
+				}
+			]
+		},
+		{
+			"id": "1f7cf9a3-aa3f-41d2-8d41-4fd5a0d24220",
+			"name": "Create New Author",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 96,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"firstname & lastname should be mandatory": true,
+				"firstname & lastname should have data": true
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"firstname & lastname should be mandatory": {
+					"pass": 1,
+					"fail": 0
+				},
+				"firstname & lastname should have data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				96
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"firstname & lastname should be mandatory": true,
+					"firstname & lastname should have data": true
+				}
+			]
+		},
+		{
+			"id": "3220c11a-df57-43c6-a726-3024bd8ca3c4",
+			"name": "Get Author idBook",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/authors/books/4",
+			"time": 112,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Searching with valid idBook": true
+			},
+			"testPassFailCounts": {
+				"Searching with valid idBook": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				112
+			],
+			"allTests": [
+				{
+					"Searching with valid idBook": true
+				}
+			]
+		},
+		{
+			"id": "81b5596b-1cb7-4633-81f8-f8209236bd67",
+			"name": "New Request",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/22",
+			"time": 94,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Author's data is updated successfully": true
+			},
+			"testPassFailCounts": {
+				"Author's data is updated successfully": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				94
+			],
+			"allTests": [
+				{
+					"Author's data is updated successfully": true
+				}
+			]
+		},
+		{
+			"id": "429ce7a8-ad1c-4e7b-883e-6b1c69600a42",
+			"name": "Get Single Author By id",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/22",
+			"time": 91,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"The author's data is changed in GET request": false
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The author's data is changed in GET request": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				91
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"The author's data is changed in GET request": false
+				}
+			]
+		},
+		{
+			"id": "41e86b43-747d-4636-823f-15bcbf5c3365",
+			"name": "Delete Author",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/22",
+			"time": 110,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				110
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1012,
+	"collection": {
+		"requests": [
+			{
+				"id": "0c22e83b-2b43-4773-88e5-270d95fc7ea5",
+				"method": "GET"
+			},
+			{
+				"id": "1f7cf9a3-aa3f-41d2-8d41-4fd5a0d24220",
+				"method": "POST"
+			},
+			{
+				"id": "3220c11a-df57-43c6-a726-3024bd8ca3c4",
+				"method": "GET"
+			},
+			{
+				"id": "81b5596b-1cb7-4633-81f8-f8209236bd67",
+				"method": "PUT"
+			},
+			{
+				"id": "429ce7a8-ad1c-4e7b-883e-6b1c69600a42",
+				"method": "GET"
+			},
+			{
+				"id": "41e86b43-747d-4636-823f-15bcbf5c3365",
+				"method": "DELETE"
+			}
+		]
+	}
+}
