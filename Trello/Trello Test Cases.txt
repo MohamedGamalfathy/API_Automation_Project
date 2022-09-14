@@ -1,0 +1,104 @@
+-------------------------------------------------------------------------------------------------------------------------
+
+Get your credential values and try the first Trello API:
+
+--------------------------------------------------------
+BASEURL : https://api.trello.com
+---------------------------------------
+Key : 19e99b439679fe1f59757d1491f4b7db
+--------------------------------------------------------------------------
+Token : 83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1
+--------------------------------------------------------------------------
+
+ API : GET >> {{BASEURL}}/1/members/me?boards=open&key={{Key}}&token={{Token}}
+
+ Description : You need to make sure that this subobject is shown inside the response (which contains boards)
+
+ Response Body :
+
+    "boards": 
+    
+    [
+        {
+            "id": "63216d14f4a58104c7e58ecf",
+            "name": "API_Automatin_Project",
+            "closed": false,
+            "idOrganization": "63200aa95220e801e5ea82aa",
+            "pinned": false
+        },
+        {
+            "id": "6322282a07508c014ff14d8a",
+            "name": "Selenium_Automation_Project",
+            "closed": false,
+            "idOrganization": "63200aa95220e801e5ea82aa",
+            "pinned": false
+        }
+    ]
+
+-------------------------------------------------------------------
+Requests & Test cases on Trello's APIs using Postman :
+-------------------------------------------------------------------
+
+Request (1) : Create a Board 
+------------------------------
+
+ API : POST >> {{BASEURL}}/1/boards/?name=Testing Board&key={{Key}}&token={{Token}}
+
+ Test Case 1 : confirm its default value of closed is false 
+ Expected Result: false
+ Actual Result: false
+ Status: Pass
+
+ Test Case 2 : confirm its default value of permissionLevel = private
+ Expected Result: private
+ Actual Result: private
+ Status: Pass
+
+ Test Case 3 : confirm its canBePublic is true
+ Expected Result: true
+ Actual Result: true
+ Status: Pass
+
+ Test Case 4 : confirm its canInvite is true
+ Expected Result: true
+ Actual Result: true
+ Status: Pass
+
+------------------------------------------------------------------------------------------------------
+
+Request (2) : Get Boards Number 
+---------------------------------
+
+ API: GET >> {{BASEURL}}members/me?boards=open&key={{Key}}&token={{Token}}
+
+ Test Case 1 : verify that number of boards in the response is above 1 
+ Expected Result: 200 ok
+ Actual Result: 200 0k
+ Status: Pass
+ 
+---------------------------------------------------------------------------------------------------------------------
+// var jsonData = pm.response.json() 
+---------------------------------------------------------------------------------------------------------------------
+// var boards_num = jsonDate.boards.length
+---------------------------------------------------------------------------------------------------------------------
+//FirstBoardID >>  pm.globals.set("FirstBoardID", jsonData.boards[0].id);
+---------------------------------------------------------------------------------------------------------------------
+//LastBoardID  >>  pm.globals.set("LastBoardID", jsonData.boards[boards_num-1].id)
+---------------------------------------------------------------------------------------------------------------------
+
+ Request (3) : Delete a Board
+-------------------------------------
+
+ API : DELETE >> {{BASEURL}}/1/boards/:id?key={{Key}}&token={{Token}}							  
+
+ Test Case 1 : response should be 200 OK
+ Expected Result: 200 ok
+ Actual Result: 200 0k
+ Status: Pass
+
+
+ Test Case 1 : Response Body  contain a "board is removed successfully".
+ Expected Result: true
+ Actual Result: true
+ Status: Pass 	
+

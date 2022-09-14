@@ -1,0 +1,135 @@
+{
+	"id": "9f808128-eb28-4711-a4af-47132164142a",
+	"name": "TRELLO REST APIs",
+	"timestamp": "2022-09-14T20:58:40.658Z",
+	"collection_id": "23228564-076a7df4-be39-4d35-8b09-019fd8809065",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 6,
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "469c213d-b56f-44aa-90e8-01af7752af4b",
+			"name": "Create A Board",
+			"url": "https://api.trello.com/1/boards/?name=Testing%20Board&key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
+			"time": 416,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"confirms its  defult value of closed is false": true,
+				"confirms its  defult value of permissionLevel is private": true,
+				"confirms its defult value of canBePublic is true": true,
+				"confirms its defult value of canInvite is true": true
+			},
+			"testPassFailCounts": {
+				"confirms its  defult value of closed is false": {
+					"pass": 1,
+					"fail": 0
+				},
+				"confirms its  defult value of permissionLevel is private": {
+					"pass": 1,
+					"fail": 0
+				},
+				"confirms its defult value of canBePublic is true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"confirms its defult value of canInvite is true": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				416
+			],
+			"allTests": [
+				{
+					"confirms its  defult value of closed is false": true,
+					"confirms its  defult value of permissionLevel is private": true,
+					"confirms its defult value of canBePublic is true": true,
+					"confirms its defult value of canInvite is true": true
+				}
+			]
+		},
+		{
+			"id": "8788cb7d-8342-4233-b0b6-e0d63aeffd71",
+			"name": "Get Boards Numbers",
+			"url": "https://api.trello.com/1/members/me?boards=open&key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
+			"time": 289,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"verify that number of boards in the response is above 1": true
+			},
+			"testPassFailCounts": {
+				"verify that number of boards in the response is above 1": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				289
+			],
+			"allTests": [
+				{
+					"verify that number of boards in the response is above 1": true
+				}
+			]
+		},
+		{
+			"id": "5aa813e1-ccb1-4d80-97fb-faadd834675b",
+			"name": "Delete a Board",
+			"url": "https://api.trello.com/1/boards/6322407f1ac2aa03b3497547?key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
+			"time": 887,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"Response Body  contain a board is removed successfully": false
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Body  contain a board is removed successfully": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				887
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"Response Body  contain a board is removed successfully": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1592,
+	"collection": {
+		"requests": [
+			{
+				"id": "469c213d-b56f-44aa-90e8-01af7752af4b",
+				"method": "POST"
+			},
+			{
+				"id": "8788cb7d-8342-4233-b0b6-e0d63aeffd71",
+				"method": "GET"
+			},
+			{
+				"id": "5aa813e1-ccb1-4d80-97fb-faadd834675b",
+				"method": "DELETE"
+			}
+		]
+	}
+}
