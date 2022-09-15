@@ -7,208 +7,444 @@
 	},
 	"item": [
 		{
-			"name": "Create A Board",
-			"event": [
+			"name": "BOARDS",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"// Test Case 1 :\r",
-							"\r",
-							"pm.test(\"confirms its  defult value of closed is false\",function()\r",
-							"{\r",
-							"    pm.expect(pm.response.json().closed).to.equal(false);\r",
-							"});\r",
-							"\r",
-							"// Test Case 2 :\r",
-							"\r",
-							"pm.test(\"confirms its  defult value of permissionLevel is private\",function()\r",
-							"{\r",
-							"    pm.expect(pm.response.json().prefs.permissionLevel).to.equal(\"private\");\r",
-							"});\r",
-							"\r",
-							"// Test Case 3 :\r",
-							"\r",
-							"pm.test(\"confirms its defult value of canBePublic is true\",function()\r",
-							"{   \r",
-							"    pm.expect(pm.response.json().prefs.canBePublic).to.equal(true);\r",
-							"});\r",
-							"\r",
-							"// Test Case 4 :\r",
-							"\r",
-							"pm.test(\"confirms its defult value of canInvite is true\",function()\r",
-							"{\r",
-							"    pm.expect(pm.response.json().prefs.canInvite ).to.equal(true);\r",
-							"});\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Testing Board\" \r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "Create A Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test Case 1 :\r",
+									"\r",
+									"pm.test(\"confirms its  defult value of closed is false\",function()\r",
+									"{\r",
+									"    pm.expect(pm.response.json().closed).to.equal(false);\r",
+									"});\r",
+									"\r",
+									"// Test Case 2 :\r",
+									"\r",
+									"pm.test(\"confirms its  defult value of permissionLevel is private\",function()\r",
+									"{\r",
+									"    pm.expect(pm.response.json().prefs.permissionLevel).to.equal(\"private\");\r",
+									"});\r",
+									"\r",
+									"// Test Case 3 :\r",
+									"\r",
+									"pm.test(\"confirms its defult value of canBePublic is true\",function()\r",
+									"{   \r",
+									"    pm.expect(pm.response.json().prefs.canBePublic).to.equal(true);\r",
+									"});\r",
+									"\r",
+									"// Test Case 4 :\r",
+									"\r",
+									"pm.test(\"confirms its defult value of canInvite is true\",function()\r",
+									"{\r",
+									"    pm.expect(pm.response.json().prefs.canInvite ).to.equal(true);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Testing Board\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/1/boards/?name=Testing Board&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Testing Board"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{BASEURL}}/1/boards/?name=Testing Board&key={{Key}}&token={{Token}}",
-					"host": [
-						"{{BASEURL}}"
-					],
-					"path": [
-						"1",
-						"boards",
-						""
-					],
-					"query": [
+				{
+					"name": "Get Boards Numbers",
+					"event": [
 						{
-							"key": "name",
-							"value": "Testing Board"
-						},
-						{
-							"key": "key",
-							"value": "{{Key}}"
-						},
-						{
-							"key": "token",
-							"value": "{{Token}}"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var boards_num = jsonData.boards.length;\r",
+									"\r",
+									"// Test Case 1 :\r",
+									"\r",
+									"pm.test(\"verify that number of boards in the response is above 1\", function () \r",
+									"{\r",
+									"    pm.expect(boards_num).to.above(1);\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"firstBoardID\",jsonData.boards[0].id);\r",
+									"pm.globals.set(\"lastBoardID\",jsonData.boards[boards_num-1].id);\r",
+									"\r",
+									"console.log(pm.globals.get(\"firstBoardID\"));\r",
+									"console.log(pm.globals.get(\"lastBoardID\"))\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASEURL}}/1/members/me?boards=open&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							],
+							"query": [
+								{
+									"key": "boards",
+									"value": "open"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test Case 1 :\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// Test Case 2 :\r",
+									"\r",
+									"pm.test(\"Response Body  contain a board is removed successfully\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData._value).to.be.contain(\"board is removed successfully\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASEURL}}/1/boards/:id?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								":id"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastBoardID}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get Boards Numbers",
-			"event": [
+			"name": "LISTS",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"var boards_num = jsonData.boards.length;\r",
-							"\r",
-							"// Test Case 1 :\r",
-							"\r",
-							"pm.test(\"verify that number of boards in the response is above 1\", function () \r",
-							"{\r",
-							"    pm.expect(boards_num).to.above(1);\r",
-							"});\r",
-							"\r",
-							"pm.globals.set(\"firstBoardID\",jsonData.boards[0].id);\r",
-							"pm.globals.set(\"lastBoardID\",jsonData.boards[boards_num-1].id);\r",
-							"\r",
-							"console.log(pm.globals.get(\"firstBoardID\"));\r",
-							"console.log(pm.globals.get(\"lastBoardID\"))\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASEURL}}/1/members/me?boards=open&key={{Key}}&token={{Token}}",
-					"host": [
-						"{{BASEURL}}"
-					],
-					"path": [
-						"1",
-						"members",
-						"me"
-					],
-					"query": [
+					"name": "Create A List",
+					"event": [
 						{
-							"key": "boards",
-							"value": "open"
-						},
-						{
-							"key": "key",
-							"value": "{{Key}}"
-						},
-						{
-							"key": "token",
-							"value": "{{Token}}"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test Case 1 :\r",
+									"\r",
+									"pm.test(\"Verify id key exist in the response\",function()\r",
+									"{\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"});\r",
+									"\r",
+									"// Test Case 2 :\r",
+									"\r",
+									"pm.test(\"Verify name key exist in the response\",function()\r",
+									"{\r",
+									"    pm.expect(jsonData).to.have.property(\"name\");\r",
+									"});\r",
+									"\r",
+									"// Test Case 3 :\r",
+									"\r",
+									"pm.test(\"Verify idBoard key exist in the response\",function()\r",
+									"{\r",
+									"    pm.expect(jsonData).to.have.property(\"idBoard\");\r",
+									"});\r",
+									"\r",
+									"// Test Case 4 :\r",
+									"\r",
+									"pm.test(\"confirms its  defult value of closed is false\",function()\r",
+									"{\r",
+									"    pm.expect(pm.response.json().closed).to.equal(false);\r",
+									"});\r",
+									"\r",
+									"// Test Case 5 :\r",
+									"\r",
+									"pm.test(\"confirms its defult value of limits is empty\",function()\r",
+									"{\r",
+									"    pm.expect(jsonData.limits).to.be.empty;\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a Board",
-			"event": [
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"Testing List\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/1/lists?name=Testing List&idBoard={{firstBoardID}}&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"1",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Testing List"
+								},
+								{
+									"key": "idBoard",
+									"value": "{{firstBoardID}}"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Test Case 1 :\r",
-							"\r",
-							"pm.test(\"response should be 200 OK\", function () {\r",
-							"    pm.expect(pm.response.code).to.eql(200);\r",
-							"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
-							"});\r",
-							"\r",
-							"// Test Case 2 :\r",
-							"\r",
-							"pm.test(\"Response Body  contain a board is removed successfully\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData._value).to.be.contain(\"board is removed successfully\");\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{BASEURL}}/1/boards/:id?key={{Key}}&token={{Token}}",
-					"host": [
-						"{{BASEURL}}"
-					],
-					"path": [
-						"1",
-						"boards",
-						":id"
-					],
-					"query": [
+					"name": "Get Lists on a Board",
+					"event": [
 						{
-							"key": "key",
-							"value": "{{Key}}"
-						},
-						{
-							"key": "token",
-							"value": "{{Token}}"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var lists_num = jsonData.length;\r",
+									"\r",
+									"// Test Case 1 :\r",
+									"\r",
+									"pm.test(\"verify that number of lists in the response is 3\", function () \r",
+									"{\r",
+									"    pm.expect(lists_num).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"firstListID\",jsonData[0].id);\r",
+									"pm.globals.set(\"lastListID\",jsonData[lists_num-1].id);\r",
+									"\r",
+									"console.log(pm.globals.get(\"firstListID\"));\r",
+									"console.log(pm.globals.get(\"lastListID\"))\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "{{lastBoardID}}"
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASEURL}}/1/boards/:id/lists?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								":id",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{firstBoardID}}"
+								}
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Archive or unarchive a list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test Case 1 :\r",
+									"\r",
+									"pm.test(\"response should be 200 OK\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+									"});\r",
+									"\r",
+									"// Test Cases 2 : \r",
+									"pm.test(\"confirms its  defult value of closed is true\",function()\r",
+									"{\r",
+									"    pm.expect(pm.response.json().closed).to.equal(true);\r",
+									"});\r",
+									"\r",
+									"// Test Cases 3 :\r",
+									"\r",
+									"pm.test(\"Response Headers include a key called Set-Cookie and its value contains the text isEnterpriseAdmin%3Dfalse\", function () {\r",
+									"    pm.response.to.have.header(\"Set-Cookie\");\r",
+									"    pm.expect(pm.response.headers.get(\"Set-Cookie\")).to.be.contain(\"isEnterpriseAdmin%3Dfalse\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASEURL}}/1/lists/:{id}/closed?key={{Key}}&token={{Token}}&value=true",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								":{id}",
+								"closed"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								},
+								{
+									"key": "value",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "{id}",
+									"value": "{{lastListID}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"auth": {

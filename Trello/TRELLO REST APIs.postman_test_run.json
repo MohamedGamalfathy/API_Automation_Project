@@ -1,18 +1,18 @@
 {
-	"id": "9f808128-eb28-4711-a4af-47132164142a",
+	"id": "5ea3cd68-e5ed-465d-a221-239b4e2c5d95",
 	"name": "TRELLO REST APIs",
-	"timestamp": "2022-09-14T20:58:40.658Z",
+	"timestamp": "2022-09-15T00:19:32.158Z",
 	"collection_id": "23228564-076a7df4-be39-4d35-8b09-019fd8809065",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 6,
+	"totalPass": 15,
 	"totalFail": 1,
 	"results": [
 		{
 			"id": "469c213d-b56f-44aa-90e8-01af7752af4b",
 			"name": "Create A Board",
 			"url": "https://api.trello.com/1/boards/?name=Testing%20Board&key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
-			"time": 416,
+			"time": 477,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -42,7 +42,7 @@
 				}
 			},
 			"times": [
-				416
+				477
 			],
 			"allTests": [
 				{
@@ -57,7 +57,7 @@
 			"id": "8788cb7d-8342-4233-b0b6-e0d63aeffd71",
 			"name": "Get Boards Numbers",
 			"url": "https://api.trello.com/1/members/me?boards=open&key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
-			"time": 289,
+			"time": 357,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -72,7 +72,7 @@
 				}
 			},
 			"times": [
-				289
+				357
 			],
 			"allTests": [
 				{
@@ -83,8 +83,8 @@
 		{
 			"id": "5aa813e1-ccb1-4d80-97fb-faadd834675b",
 			"name": "Delete a Board",
-			"url": "https://api.trello.com/1/boards/6322407f1ac2aa03b3497547?key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
-			"time": 887,
+			"url": "https://api.trello.com/1/boards/63226f8c75f00c01d40c7aa0?key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
+			"time": 652,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -104,7 +104,7 @@
 				}
 			},
 			"times": [
-				887
+				652
 			],
 			"allTests": [
 				{
@@ -112,10 +112,127 @@
 					"Response Body  contain a board is removed successfully": false
 				}
 			]
+		},
+		{
+			"id": "095eb2a8-ad58-4d64-a182-209119d4ecf4",
+			"name": "Create A List",
+			"url": "https://api.trello.com/1/lists?name=Testing%20List&idBoard=63216d14f4a58104c7e58ecf&key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
+			"time": 345,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify id key exist in the response": true,
+				"Verify name key exist in the response": true,
+				"Verify idBoard key exist in the response": true,
+				"confirms its  defult value of closed is false": true,
+				"confirms its defult value of limits is empty": true
+			},
+			"testPassFailCounts": {
+				"Verify id key exist in the response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify name key exist in the response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify idBoard key exist in the response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"confirms its  defult value of closed is false": {
+					"pass": 1,
+					"fail": 0
+				},
+				"confirms its defult value of limits is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				345
+			],
+			"allTests": [
+				{
+					"Verify id key exist in the response": true,
+					"Verify name key exist in the response": true,
+					"Verify idBoard key exist in the response": true,
+					"confirms its  defult value of closed is false": true,
+					"confirms its defult value of limits is empty": true
+				}
+			]
+		},
+		{
+			"id": "bbb44ac3-458a-4195-af8f-6cb177e04eb4",
+			"name": "Get Lists on a Board",
+			"url": "https://api.trello.com/1/boards/63216d14f4a58104c7e58ecf/lists?key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1",
+			"time": 279,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"verify that number of lists in the response is 3": true
+			},
+			"testPassFailCounts": {
+				"verify that number of lists in the response is 3": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				279
+			],
+			"allTests": [
+				{
+					"verify that number of lists in the response is 3": true
+				}
+			]
+		},
+		{
+			"id": "d73948ad-baa8-4547-bfd5-bd000fd4f470",
+			"name": "Archive or unarchive a list",
+			"url": "https://api.trello.com/1/lists/63216d14f4a58104c7e58ed7/closed?key=19e99b439679fe1f59757d1491f4b7db&token=83bcb6fb702678f4f06fa038dd4955a16fd46a5fcf5a595fa912daae4a2962a1&value=true",
+			"time": 398,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"response should be 200 OK": true,
+				"confirms its  defult value of closed is true": true,
+				"Response Headers include a key called Set-Cookie and its value contains the text isEnterpriseAdmin%3Dfalse": true
+			},
+			"testPassFailCounts": {
+				"response should be 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"confirms its  defult value of closed is true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Headers include a key called Set-Cookie and its value contains the text isEnterpriseAdmin%3Dfalse": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				398
+			],
+			"allTests": [
+				{
+					"response should be 200 OK": true,
+					"confirms its  defult value of closed is true": true,
+					"Response Headers include a key called Set-Cookie and its value contains the text isEnterpriseAdmin%3Dfalse": true
+				}
+			]
 		}
 	],
 	"count": 1,
-	"totalTime": 1592,
+	"totalTime": 2508,
 	"collection": {
 		"requests": [
 			{
@@ -129,6 +246,18 @@
 			{
 				"id": "5aa813e1-ccb1-4d80-97fb-faadd834675b",
 				"method": "DELETE"
+			},
+			{
+				"id": "095eb2a8-ad58-4d64-a182-209119d4ecf4",
+				"method": "POST"
+			},
+			{
+				"id": "bbb44ac3-458a-4195-af8f-6cb177e04eb4",
+				"method": "GET"
+			},
+			{
+				"id": "d73948ad-baa8-4547-bfd5-bd000fd4f470",
+				"method": "PUT"
 			}
 		]
 	}

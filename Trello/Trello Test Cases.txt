@@ -49,17 +49,17 @@ Request (1) : Create a Board
  Actual Result: false
  Status: Pass
 
- Test Case 2 : confirm its default value of permissionLevel = private
+ Test Case 2 : confirm its default value of permissionLevel is private
  Expected Result: private
  Actual Result: private
  Status: Pass
 
- Test Case 3 : confirm its canBePublic is true
+ Test Case 3 : confirm its default value of canBePublic is true
  Expected Result: true
  Actual Result: true
  Status: Pass
 
- Test Case 4 : confirm its canInvite is true
+ Test Case 4 : confirm its default value of canInvite is true
  Expected Result: true
  Actual Result: true
  Status: Pass
@@ -69,7 +69,7 @@ Request (1) : Create a Board
 Request (2) : Get Boards Number 
 ---------------------------------
 
- API: GET >> {{BASEURL}}members/me?boards=open&key={{Key}}&token={{Token}}
+ API: GET >> {{BASEURL}}/1/members/me?boards=open&key={{Key}}&token={{Token}}
 
  Test Case 1 : verify that number of boards in the response is above 1 
  Expected Result: 200 ok
@@ -81,9 +81,9 @@ Request (2) : Get Boards Number
 ---------------------------------------------------------------------------------------------------------------------
 // var boards_num = jsonDate.boards.length
 ---------------------------------------------------------------------------------------------------------------------
-//FirstBoardID >>  pm.globals.set("FirstBoardID", jsonData.boards[0].id);
+//firstBoardID >>  pm.globals.set("firstBoardID", jsonData.boards[0].id);
 ---------------------------------------------------------------------------------------------------------------------
-//LastBoardID  >>  pm.globals.set("LastBoardID", jsonData.boards[boards_num-1].id)
+//lastBoardID  >>  pm.globals.set("lastBoardID", jsonData.boards[boards_num-1].id)
 ---------------------------------------------------------------------------------------------------------------------
 
  Request (3) : Delete a Board
@@ -99,6 +99,83 @@ Request (2) : Get Boards Number
 
  Test Case 1 : Response Body  contain a "board is removed successfully".
  Expected Result: true
+ Actual Result: false
+ Status: failed 	
+
+----------------------------------------------------------------------------------------------------------------------
+
+Request (4) : Create a New List 
+---------------------------------
+
+ API : POST >> {{BASEURL}}/1/lists?name=Testing List&idBoard={{lastBoardID}}&key={{Key}}&token={{Token}}
+
+ Test Case 1 : Verify id key exist in the response  
+ Expected Result: id Key exists
+ Actual Result: id key exists
+ Status: Pass
+
+ Test Case 2 : Verify name key exist in the response  
+ Expected Result: name key exists
+ Actual Result: name key exists
+ Status: Pass
+
+ Test Case 3 : Verify idBoard key exist in the response  
+ Expected Result: idBoard key exists
+ Actual Result: idBoard key exists
+ Status: Pass
+
+ Test Case 4 : confirm its default value of closed is false
+ Expected Result: false
+ Actual Result: false
+ Status: Pass
+
+ Test Case 5 : confirm its default value of limits is empty
+ Expected Result:  limits are empty object {}
+ Actual Result:  limits are empty object {}
+ Status: Pass
+
+------------------------------------------------------------------------------------------------------
+
+Request (5) : Get Lists on a Board 
+------------------------------------
+
+ API: GET >> {{BASEURL}}/1/boards/:id/lists?key={{Key}}&token={{Token}}
+
+ Test Case 1 : verify that the number of lists in the response is 3 //[default lists are To Do, Doing, Done].
+
+ Expected Result: 200 ok
+ Actual Result: 200 0k
+ Status: Pass
+ 
+---------------------------------------------------------------------------------------------------------------------
+// var jsonData = pm.response.json() 
+---------------------------------------------------------------------------------------------------------------------
+// var lists_num = jsonDate.length
+---------------------------------------------------------------------------------------------------------------------
+//firstListID >>  pm.globals.set("firstListID", jsonData[0].id);
+---------------------------------------------------------------------------------------------------------------------
+//lastListID  >>  pm.globals.set("lastListID", jsonData[lists_num-1].id)
+---------------------------------------------------------------------------------------------------------------------
+
+ Request (6) : Archive or unarchive a list
+---------------------------------------------
+
+ API : PUT >> {{BASEURL}}/1/lists/:{id}/closed?key={{Key}}&token={{Token}}&value=true							  
+
+ Test Case 1 : response should be 200 OK
+ Expected Result: 200 ok
+ Actual Result: 200 0k
+ Status: Pass
+
+
+ Test Case 2 : confirm its default value of closed is true 
+ Expected Result: true
  Actual Result: true
- Status: Pass 	
+ Status: Pass	
+
+ Test Case 3 : Response Headers include a key called "Set-Cookie" and its value contains the text "isEnterpriseAdmin%3Dfalse". 
+ Expected Result: "isEnterpriseAdmin%3Dfalse"
+ Actual Result: "isEnterpriseAdmin%3Dfalse"
+ Status: Pass
+
 
