@@ -94,7 +94,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Boards Numbers",
+					"name": "Get Boards ID",
 					"event": [
 						{
 							"listen": "test",
@@ -111,11 +111,11 @@
 									"    pm.expect(boards_num).to.above(1);\r",
 									"});\r",
 									"\r",
-									"pm.globals.set(\"firstBoardID\",jsonData.boards[0].id);\r",
-									"pm.globals.set(\"lastBoardID\",jsonData.boards[boards_num-1].id);\r",
+									"pm.globals.set(\"FirstBoardID\",jsonData.boards[0].id);\r",
+									"pm.globals.set(\"LastBoardID\",jsonData.boards[boards_num-1].id);\r",
 									"\r",
-									"console.log(pm.globals.get(\"firstBoardID\"));\r",
-									"console.log(pm.globals.get(\"lastBoardID\"))\r",
+									"console.log(pm.globals.get(\"FirstBoardID\"));\r",
+									"console.log(pm.globals.get(\"LastBoardID\"))\r",
 									"\r",
 									""
 								],
@@ -206,7 +206,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{lastBoardID}}"
+									"value": "{{FirstBoardID}}"
 								}
 							]
 						}
@@ -281,7 +281,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASEURL}}/1/lists?name=Testing List&idBoard={{firstBoardID}}&key={{Key}}&token={{Token}}",
+							"raw": "{{BASEURL}}/1/lists?name=Testing List&idBoard={{LastBoardID}}&key={{Key}}&token={{Token}}",
 							"host": [
 								"{{BASEURL}}"
 							],
@@ -296,7 +296,7 @@
 								},
 								{
 									"key": "idBoard",
-									"value": "{{firstBoardID}}"
+									"value": "{{LastBoardID}}"
 								},
 								{
 									"key": "key",
@@ -326,14 +326,14 @@
 									"\r",
 									"pm.test(\"verify that number of lists in the response is 3\", function () \r",
 									"{\r",
-									"    pm.expect(lists_num).to.eql(3);\r",
+									"    pm.expect(lists_num).to.be.within(3,7);\r",
 									"});\r",
 									"\r",
-									"pm.globals.set(\"firstListID\",jsonData[0].id);\r",
-									"pm.globals.set(\"lastListID\",jsonData[lists_num-1].id);\r",
+									"pm.globals.set(\"FirstListID\",jsonData[0].id);\r",
+									"pm.globals.set(\"LastListID\",jsonData[lists_num-1].id);\r",
 									"\r",
-									"console.log(pm.globals.get(\"firstListID\"));\r",
-									"console.log(pm.globals.get(\"lastListID\"))\r",
+									"console.log(pm.globals.get(\"FirstListID\"));\r",
+									"console.log(pm.globals.get(\"LastListID\"))\r",
 									"\r",
 									""
 								],
@@ -368,7 +368,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{firstBoardID}}"
+									"value": "{{LastBoardID}}"
 								}
 							]
 						}
@@ -437,7 +437,7 @@
 							"variable": [
 								{
 									"key": "{id}",
-									"value": "{{lastListID}}"
+									"value": "{{LastListID}}"
 								}
 							]
 						}
